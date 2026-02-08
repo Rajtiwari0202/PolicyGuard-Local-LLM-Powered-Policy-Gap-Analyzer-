@@ -112,8 +112,8 @@ This document serves as the **baseline reference** for identifying missing or we
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/Rajpatel2924/PolicyGuard.git
-cd PolicyGuard
+git clone https://github.com/Rajtiwari0202/PolicyGuard-Local-LLM-Powered-Policy-Gap-Analyzer-
+cd PolicyGuard-Local-LLM-Powered-Policy-Gap-Analyzer-
 ```
 ### 2️⃣ Create Virtual Environment
 ```bash
