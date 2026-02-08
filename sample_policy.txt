@@ -1,0 +1,10 @@
+Patch Management Policy
+
+Purpose:
+This policy defines patching rules.
+
+Scope:
+Applies to all organizational systems.
+
+Responsibilities:
+IT team installs updates monthly.
