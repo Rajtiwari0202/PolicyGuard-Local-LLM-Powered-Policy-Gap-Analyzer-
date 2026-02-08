@@ -58,34 +58,30 @@ All computation happens **locally**, ensuring data privacy and compliance.
 
 ## 🔄 High-Level Workflow
 
-Policy Document
-↓
-Policy Reader
-↓
-Gap Detection Engine
-↓
-Local LLM Analysis
-↓
-Rewritten Policy + Improvement Roadmap
-↓
-Offline Output Reports
-
+1. Policy Document  
+2. Policy Reader  
+3. Gap Detection Engine  
+4. Local LLM Analysis  
+5. Rewritten Policy + Improvement Roadmap  
+6. Offline Output Reports  
 ---
 
 ## 📁 Project Structure
+
+```text
 PolicyGuard-PS1/
-├── app.py # Entry point / orchestration
-├── main.py # CLI execution logic
-├── policy_reader.py # Policy parsing & preprocessing
-├── gap_detector.py # Gap identification logic
-├── llm_rewriter.py # Local LLM-based rewriting & suggestions
-├── test_llm.py # LLM validation & testing
-├── sample_policy.txt # Dummy organizational policy (test data)
-├── outputs/ # Generated analysis & revised policies
+├── app.py              # Streamlit UI
+├── main.py             # CLI execution logic
+├── policy_reader.py    # Policy parsing
+├── gap_detector.py     # Gap identification
+├── llm_rewriter.py     # Local LLM rewriting
+├── test_llm.py         # LLM testing
+├── sample_policy.txt   # Test policy
+├── outputs/            # Generated reports
+├── assets/             # Screenshots
 ├── .gitignore
 └── README.md
-
-
+```
 ---
 
 ## 📊 Test Data (As Required)
@@ -116,68 +112,98 @@ This document serves as the **baseline reference** for identifying missing or we
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/Rakshit-Gupta-77/PolicyGuard-PS1.git
-cd PolicyGuard-PS1
-
-2️⃣ Create Virtual Environment
+git clone https://github.com/Rajpatel2924/PolicyGuard.git
+cd PolicyGuard
+```
+### 2️⃣ Create Virtual Environment
+```bash
 python -m venv venv
 source venv/bin/activate      # Linux / macOS
 venv\Scripts\activate         # Windows
-
-3️⃣ Install Dependencies
+```
+### 3️⃣ Install Dependencies
+```bash
 pip install -r requirements.txt
-
+```
 ⚠️ Ensure the selected local LLM is properly installed and configured on the system.
 
-▶️ How to Run
-Run Full Policy Analysis
+### ▶️ How to Run
+```bash
+# Run Full Policy Analysis
 python main.py --policy sample_policy.txt
+```
+## 📤 Output
 
-Output
+The system generates the following artifacts:
 
-Identified policy gaps
+- ⭐ **Identified policy gaps**
+- ⭐ **Revised policy text**
+- ⭐ **Improvement roadmap aligned with NIST CSF**
+- ⭐ **Stored in the `outputs/` directory**
 
-Revised policy text
+---
 
-Improvement roadmap aligned with NIST CSF
+## 🎨 UI Interface
 
-Stored in the outputs/ directory
-🧪 Testing
+Below are screenshots of the PolicyGuard user interface:
 
-Validate LLM behavior and gap detection logic:
+![UI Screenshot 1](assets/Screenshot%202026-02-08%20at%2011.00.45%E2%80%AFPM.png)
+
+![UI Screenshot 2](assets/Screenshot%202026-02-08%20at%2011.01.04%E2%80%AFPM.png)
+
+![UI Screenshot 3](assets/Screenshot%202026-02-08%20at%2011.01.20%E2%80%AFPM.png)
+
+![UI Screenshot 4](assets/Screenshot%202026-02-08%20at%2011.01.41%E2%80%AFPM.png)
+
+---
+
+## 🧪 Testing
+
+Validate LLM behavior and gap detection logic by running:
+
+```bash
 python test_llm.py
-📦 Deliverables Mapping (PS Compliance)
-PS Requirement	Implementation
-Offline LLM	✅ Local lightweight LLM
-No APIs	✅ Zero external API usage
-Gap Identification	✅ gap_detector.py
-Policy Revision	✅ llm_rewriter.py
-Roadmap Generation	✅ Included in outputs
-Documentation	✅ This README
 
-⚠️ Limitations
+```
+## 📦 Deliverables Mapping (PS Compliance)
+| PS Requirement     | Implementation          |
+| ------------------ | ----------------------- |
+| Offline LLM        | ✅ Local lightweight LLM |
+| No External APIs   | ✅ Zero API usage        |
+| Gap Identification | ✅ `gap_detector.py`     |
+| Policy Revision    | ✅ `llm_rewriter.py`     |
+| Roadmap Generation | ✅ Included in outputs   |
+| Documentation      | ✅ This README           |
 
-Quality of suggestions depends on the local LLM’s size and training
+## ⚠️ Limitations
 
-Framework mapping is currently rule-guided + LLM-assisted
+- Quality of suggestions depends on the local LLM’s size and training
 
-PDF parsing of policy documents is limited (text-based input preferred)
+- Framework mapping is currently rule-guided + LLM-assisted
 
-🔮 Future Improvements
+- PDF parsing of policy documents is limited (text-based input preferred)
 
-Support for direct PDF ingestion
+## 🔮 Future Improvements
 
-Multi-framework comparison (ISO 27001, COBIT)
+- Support for direct PDF ingestion
 
-Confidence scoring for policy completeness
+- Multi-framework comparison (ISO 27001, COBIT)
 
-Interactive dashboard (still offline)
+- Confidence scoring for policy completeness
 
-👥 Team & Hackathon
+- Interactive dashboard (still offline)
 
+## 👥 Team & Hackathon
 Built for HackIITK 2k26
 Problem Statement 1 – Policy Gap Analysis using Local LLM
 
-⭐ Final Note
+### THE MATRIX MINDS
+- Raj Patel
+- Raj Tiwari
+- Rakshit Gupta 
+- Sidak Sethi Singh 
+
+
+## ⭐ Final Note
 
 This project prioritizes privacy, offline security, and real-world applicability, making it suitable for organizations that cannot rely on cloud-based AI solutions for sensitive policy analysis.
