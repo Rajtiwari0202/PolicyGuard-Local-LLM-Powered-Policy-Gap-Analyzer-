@@ -1,8 +1,22 @@
-Missing Sections Found:
+POLICYGUARD GAP ANALYSIS REPORT
 
-- Roles and Responsibilities
-- Access Control
-- Incident Response
-- Risk Management
-- Logging and Monitoring
-- Compliance
+Domain: Patch Management
+Compliance Score: 27.5%
+Readiness: High Risk
+
+Missing Controls:
+- [High] PR-01 Access Control (Protect): Specify least privilege, MFA, administrative access, reviews, and joiner/mover/leaver handling.
+- [High] ID-01 Risk Management (Identify): Connect the policy to risk assessment, risk acceptance, exceptions, and review cadence.
+- [Medium] DE-01 Logging and Monitoring (Detect): Define monitoring, logging retention, alert triage, and evidence requirements.
+- [Critical] RS-01 Incident Response (Respond): Describe escalation, containment, communications, rollback, and post-incident review.
+- [High] RC-01 Recovery and Continuity (Recover): Add recovery expectations, rollback criteria, continuity steps, and restoration validation.
+- [High] GV-04 Compliance and Review (Govern): Define compliance obligations, audit evidence, exception handling, and periodic review.
+
+Present Controls:
+- GV-01 Purpose: Purpose:
+- GV-02 Scope: Scope:
+- GV-03 Roles and Responsibilities: Responsibilities:
+
+Vague Language Flags:
+- Replace vague phrase: 'when possible'
+- Replace vague phrase: 'may'

@@ -1,74 +1,52 @@
-from policy_reader import read_policy
-from gap_detector import find_gaps
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+
+from gap_detector import analyze_policy, build_gap_report
 from llm_rewriter import rewrite_policy
+from policy_reader import read_policy
 
-# Input policy file
-file_path = "sample_policy.txt"
 
-print("\nReading Policy Document...\n")
-policy_text = read_policy(file_path)
+def run_analysis(policy_path: str, domain: str, output_dir: str = "outputs") -> dict:
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
 
-print("Finding Gaps...\n")
-gaps = find_gaps(policy_text)
+    policy_text = read_policy(policy_path)
+    analysis = analyze_policy(policy_text, domain)
+    improved_policy = rewrite_policy(policy_text, analysis["gaps"], domain)
 
-print("Missing Sections:")
-print(gaps)
+    gap_report = build_gap_report(analysis)
+    final_report = "\n\n".join([
+        gap_report,
+        "IMPROVED POLICY",
+        improved_policy,
+    ])
 
-# -------------------------------
-# ✅ Upgrade 1: Save Gap Report File
-# -------------------------------
-with open("outputs/gaps_report.txt", "w") as f:
-    f.write("Missing Sections Found:\n\n")
-    for gap in gaps:
-        f.write("- " + gap + "\n")
+    (output_path / "analysis.json").write_text(json.dumps(analysis, indent=2), encoding="utf-8")
+    (output_path / "gaps_report.txt").write_text(gap_report, encoding="utf-8")
+    (output_path / "compliance_score.txt").write_text(f"{analysis['score']}%\n", encoding="utf-8")
+    (output_path / "improved_policy.txt").write_text(improved_policy, encoding="utf-8")
+    (output_path / "final_report.txt").write_text(final_report, encoding="utf-8")
 
-print("\n✅ Gap Report Saved Successfully!")
-print("File: outputs/gaps_report.txt")
+    return analysis
 
-# -------------------------------
-# ✅ Upgrade 2: Compliance Score
-# -------------------------------
-total_sections = 8
-found_sections = total_sections - len(gaps)
-score = (found_sections / total_sections) * 100
 
-print(f"\nPolicy Compliance Score: {score:.2f}%")
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Offline policy gap analyzer powered by local LLM workflows.")
+    parser.add_argument("--policy", default="sample_policy.txt", help="Path to a TXT policy document.")
+    parser.add_argument("--domain", default="Patch Management", help="Policy domain label.")
+    parser.add_argument("--output-dir", default="outputs", help="Directory where reports will be written.")
+    args = parser.parse_args()
 
-with open("outputs/compliance_score.txt", "w") as f:
-    f.write(f"Policy Compliance Score: {score:.2f}%\n")
+    analysis = run_analysis(args.policy, args.domain, args.output_dir)
+    print("PolicyGuard analysis complete")
+    print(f"Score: {analysis['score']}%")
+    print(f"Readiness: {analysis['readiness']}")
+    print(f"Missing controls: {analysis['summary']['missing']}")
+    print(f"Reports written to: {args.output_dir}")
 
-print("✅ Compliance Score Saved Successfully!")
-print("File: outputs/compliance_score.txt")
 
-# -------------------------------
-# Generate Improved Policy using Offline LLM
-# -------------------------------
-print("\nGenerating Improved Policy using Offline LLM...\n")
-improved_policy = rewrite_policy(policy_text, gaps)
-
-# -------------------------------
-# Save Improved Policy Output
-# -------------------------------
-with open("outputs/improved_policy.txt", "w") as f:
-    f.write(improved_policy)
-
-print("\n✅ Improved Policy Saved Successfully!")
-print("File: outputs/improved_policy.txt")
-
-# -------------------------------
-# ✅ Upgrade 3: Save Full Final Report (Optional)
-# -------------------------------
-with open("outputs/final_report.txt", "w") as f:
-    f.write("=== POLICY GAP ANALYSIS REPORT ===\n\n")
-    f.write("Missing Sections:\n")
-    for gap in gaps:
-        f.write("- " + gap + "\n")
-
-    f.write("\n-----------------------------\n")
-    f.write(f"Compliance Score: {score:.2f}%\n")
-    f.write("\n-----------------------------\n")
-    f.write("Improved Policy Draft:\n\n")
-    f.write(improved_policy)
-
-print("\n✅ Full Final Report Saved Successfully!")
-print("File: outputs/final_report.txt")
+if __name__ == "__main__":
+    main()

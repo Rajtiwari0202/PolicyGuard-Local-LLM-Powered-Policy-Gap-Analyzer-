@@ -1,10 +1,13 @@
 Patch Management Policy
 
 Purpose:
-This policy defines patching rules.
+This policy defines patching expectations for organization-managed systems.
 
 Scope:
-Applies to all organizational systems.
+This policy applies to employee laptops, production servers, and business applications.
 
 Responsibilities:
-IT team installs updates monthly.
+The IT operations team installs operating system and application updates monthly when possible.
+
+Change Handling:
+Emergency patches may be applied outside the normal maintenance window after manager approval.

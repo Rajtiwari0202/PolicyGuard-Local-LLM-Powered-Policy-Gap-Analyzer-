@@ -1,209 +1,121 @@
-# 🛡️ PolicyGuard — Local LLM Powered Policy Gap Analyzer  
-### HackIITK 2k26 | Problem Statement 1
+# PolicyGuard - Local LLM Powered Policy Gap Analyzer
 
-> **Offline Policy Gap Analysis and Improvement Module using a Local LLM**
+PolicyGuard is an offline cybersecurity policy analysis dashboard. It reviews organizational policy text against a NIST-style control baseline, identifies missing governance controls, ranks severity, calculates a compliance score, and generates an improved policy draft using a local LLM workflow.
 
----
+The project is built for privacy-sensitive environments where policy documents cannot be sent to cloud AI services.
 
-## 📌 Problem Statement
+## Portfolio Highlights
 
-Organizational cybersecurity policies are foundational governance documents. However, many real-world policies suffer from **incomplete coverage, vague controls, and missing alignment with industry standards** such as the **NIST Cybersecurity Framework**.
+- Executive Streamlit dashboard with compliance score, readiness status, control coverage, gap register, and exports.
+- Weighted policy analysis engine with NIST function mapping, severity ranking, recommendations, evidence snippets, and vague-language flags.
+- Local Ollama support for LLM rewriting.
+- Deterministic offline fallback writer when Ollama is not running, so the demo always works.
+- CLI mode that writes gap report, score, analysis JSON, improved policy, and final report.
+- Pytest coverage for gap detection, scoring, and offline rewrite fallback.
 
-The objective of this project is to **analyze existing organizational policy documents**, identify gaps by benchmarking them against recognized frameworks, and **suggest improved policy revisions and a roadmap for enhancement** — all while operating **entirely offline using a lightweight local LLM**, as mandated by the problem statement.
+## Tech Stack
 
----
+| Layer | Tools |
+| --- | --- |
+| UI | Streamlit |
+| Analysis | Python rule engine |
+| Local LLM | Ollama-compatible API |
+| Reports | TXT and JSON exports |
+| Tests | pytest |
 
-## 🎯 Objective
+## How It Works
 
-- Identify **policy gaps and deficiencies**
-- Benchmark policies against:
-  - **CIS MS-ISAC NIST Cybersecurity Framework Policy Template Guide (2024)**
-- Revise existing policies to:
-  - Address identified gaps
-  - Align with NIST Cybersecurity Framework
-- Ensure **100% offline execution** using a **locally hosted lightweight LLM**
+1. User uploads, pastes, or selects a sample policy.
+2. PolicyGuard checks the policy against a control library covering Govern, Identify, Protect, Detect, Respond, and Recover functions.
+3. The app calculates weighted compliance and prioritizes missing controls.
+4. The rewrite module asks Ollama for a revised policy when available.
+5. If Ollama is unavailable, PolicyGuard still produces an audit-ready fallback policy and 30/60/90 remediation roadmap.
+6. The user can download gap reports, analysis JSON, and improved policy drafts.
 
----
+## Run Locally
 
-## 🔒 Key Constraints (Strictly Followed)
+```powershell
+cd F:\PolicyGuard
+py -m venv venv
+.\venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+streamlit run app.py
+```
 
-✅ Fully **offline execution**  
-✅ **Local LLM only** (no cloud models)  
-✅ **No external APIs**  
-✅ **No internet dependency**  
-✅ Lightweight and locally deployable architecture  
-
----
-
-## 🧠 Solution Overview
-
-**PolicyGuard** is a modular Python-based system that:
-
-1. Accepts an organizational policy document as input
-2. Parses and structures the policy text
-3. Compares it against reference controls derived from the  
-   **CIS MS-ISAC NIST Cybersecurity Framework Policy Template (2024)**
-4. Identifies:
-   - Missing sections
-   - Incomplete controls
-   - Weak or vague statements
-5. Uses a **local LLM** to:
-   - Suggest policy improvements
-   - Rewrite deficient sections
-   - Generate a **policy improvement roadmap**
-
-All computation happens **locally**, ensuring data privacy and compliance.
-
----
-
-## 🔄 High-Level Workflow
-
-1. Policy Document  
-2. Policy Reader  
-3. Gap Detection Engine  
-4. Local LLM Analysis  
-5. Rewritten Policy + Improvement Roadmap  
-6. Offline Output Reports  
----
-
-## 📁 Project Structure
+Open:
 
 ```text
-PolicyGuard-PS1/
-├── app.py              # Streamlit UI
-├── main.py             # CLI execution logic
-├── policy_reader.py    # Policy parsing
-├── gap_detector.py     # Gap identification
-├── llm_rewriter.py     # Local LLM rewriting
-├── test_llm.py         # LLM testing
-├── sample_policy.txt   # Test policy
-├── outputs/            # Generated reports
-├── assets/             # Screenshots
-├── .gitignore
-└── README.md
+http://localhost:8501
 ```
----
 
-## 📊 Test Data (As Required)
+## Optional Ollama Setup
 
-Dummy organizational policies are created for validation across:
+PolicyGuard works without Ollama because it includes a deterministic offline fallback. To use a real local LLM:
 
-- Information Security Management System (ISMS)
-- Data Privacy & Security
-- Patch Management
-- Risk Management
-
-These policies simulate real-world incomplete policy documents and are used to evaluate the effectiveness of the gap analysis and revision process.
-
----
-
-## 📚 Reference Framework
-
-Gap analysis and alignment are based on:
-
-**CIS MS-ISAC NIST Cybersecurity Framework  
-Policy Template Guide (2024)**
-
-This document serves as the **baseline reference** for identifying missing or weak policy controls.
-
----
-
-## ⚙️ Installation & Setup
-
-### 1️⃣ Clone the Repository
-```bash
-git clone https://github.com/Rajtiwari0202/PolicyGuard-Local-LLM-Powered-Policy-Gap-Analyzer-
-cd PolicyGuard-Local-LLM-Powered-Policy-Gap-Analyzer-
+```powershell
+ollama pull llama3
+ollama serve
 ```
-### 2️⃣ Create Virtual Environment
-```bash
-python -m venv venv
-source venv/bin/activate      # Linux / macOS
-venv\Scripts\activate         # Windows
+
+Optional environment variables:
+
+```powershell
+$env:OLLAMA_URL="http://localhost:11434/api/generate"
+$env:OLLAMA_MODEL="llama3"
 ```
-### 3️⃣ Install Dependencies
-```bash
-pip install -r requirements.txt
+
+## CLI Usage
+
+```powershell
+py main.py --policy sample_policy.txt --domain "Patch Management"
 ```
-⚠️ Ensure the selected local LLM is properly installed and configured on the system.
 
-### ▶️ How to Run
-```bash
-# Run Full Policy Analysis
-python main.py --policy sample_policy.txt
+Generated files:
+
+```text
+outputs/analysis.json
+outputs/compliance_score.txt
+outputs/gaps_report.txt
+outputs/improved_policy.txt
+outputs/final_report.txt
 ```
-## 📤 Output
 
-The system generates the following artifacts:
+## Testing
 
-- ⭐ **Identified policy gaps**
-- ⭐ **Revised policy text**
-- ⭐ **Improvement roadmap aligned with NIST CSF**
-- ⭐ **Stored in the `outputs/` directory**
-
----
-
-## 🎨 UI Interface
-
-Below are screenshots of the PolicyGuard user interface:
-
-![UI Screenshot 1](assets/Screenshot%202026-02-08%20at%2011.00.45%E2%80%AFPM.png)
-
-![UI Screenshot 2](assets/Screenshot%202026-02-08%20at%2011.01.04%E2%80%AFPM.png)
-
-![UI Screenshot 3](assets/Screenshot%202026-02-08%20at%2011.01.20%E2%80%AFPM.png)
-
-![UI Screenshot 4](assets/Screenshot%202026-02-08%20at%2011.01.41%E2%80%AFPM.png)
-
----
-
-## 🧪 Testing
-
-Validate LLM behavior and gap detection logic by running:
-
-```bash
-python test_llm.py
-
+```powershell
+pytest
 ```
-## 📦 Deliverables Mapping (PS Compliance)
-| PS Requirement     | Implementation          |
-| ------------------ | ----------------------- |
-| Offline LLM        | ✅ Local lightweight LLM |
-| No External APIs   | ✅ Zero API usage        |
-| Gap Identification | ✅ `gap_detector.py`     |
-| Policy Revision    | ✅ `llm_rewriter.py`     |
-| Roadmap Generation | ✅ Included in outputs   |
-| Documentation      | ✅ This README           |
 
-## ⚠️ Limitations
+## Resume Bullets
 
-- Quality of suggestions depends on the local LLM’s size and training
+- Built an offline cybersecurity policy analyzer that benchmarks policy documents against a NIST-style control baseline and calculates weighted compliance scores.
+- Designed a Streamlit executive dashboard with gap severity ranking, evidence snippets, vague-language detection, remediation guidance, and downloadable reports.
+- Integrated Ollama-compatible local LLM rewriting with a deterministic fallback generator, ensuring the product demo works even without a running model.
+- Added CLI reporting and pytest coverage for gap detection, scoring consistency, and offline rewrite behavior.
 
-- Framework mapping is currently rule-guided + LLM-assisted
+## Interview Talking Points
 
-- PDF parsing of policy documents is limited (text-based input preferred)
+- Why local LLM execution matters for policy/privacy workloads.
+- How weighted controls produce a more meaningful score than simple keyword matching.
+- How deterministic fallback keeps demos reliable while preserving the local AI story.
+- How severity ranking supports remediation planning and executive reporting.
 
-## 🔮 Future Improvements
+## Project Structure
 
-- Support for direct PDF ingestion
+```text
+PolicyGuard/
+├── app.py              # Streamlit dashboard
+├── main.py             # CLI report generator
+├── gap_detector.py     # Control library and scoring engine
+├── llm_rewriter.py     # Ollama + fallback rewrite workflow
+├── policy_reader.py    # File reader
+├── sample_policy.txt   # Demo policy
+├── test_llm.py         # pytest suite
+├── requirements.txt
+└── outputs/
+```
 
-- Multi-framework comparison (ISO 27001, COBIT)
+## Author
 
-- Confidence scoring for policy completeness
-
-- Interactive dashboard (still offline)
-
-## 👥 Team & Hackathon
-Built for HackIITK 2k26
-Problem Statement 1 – Policy Gap Analysis using Local LLM
-
-### THE MATRIX MINDS
-- Raj Patel
-- Raj Tiwari
-- Rakshit Gupta 
-- Sidak Sethi Singh 
-
-
-## ⭐ Final Note
-
-This project prioritizes privacy, offline security, and real-world applicability, making it suitable for organizations that cannot rely on cloud-based AI solutions for sensitive policy analysis.
+Raj Tiwari  
+GitHub: https://github.com/Rajtiwari0202

@@ -1,13 +1,60 @@
-Patch Management Policy (Revised)
+=== Executive Summary ===
+PolicyGuard analyzed the submitted policy and calculated a pre-remediation compliance score of 27.5%.
+The rewritten version below strengthens governance, control ownership, risk management, response, recovery, monitoring, and compliance review language while preserving the original policy intent.
 
+=== Improved Policy ===
 
-**Introduction: Purpose & Scope**
-The purpose of this Patch Management Policy is to establish guidelines and procedures that ensure the timely application, testing, verification, documentation, reporting, auditing, configuration management, integrity checking, rollback capability in case an update causes issues (incident response), adherence to security controls (access control) within organizational systems.
+Purpose
+This policy establishes mandatory cybersecurity governance requirements to protect organizational systems, data, users, and business operations.
 
-**Roles and Responsibilities: Patch Management Team & All Employees**
-The IT team will be responsible for installing updates on a monthly basis, with the assistance of all employees who are required to maintain awareness about software changes affecting their work environment or system configurations they utilize. Staff members must report any anomalies encountered post-update immediately to IT department. 
+Scope
+This policy applies to employees, contractors, administrators, endpoints, servers, cloud services, applications, network devices, and third-party systems that process organizational data.
 
-**Access Control: Authorized Access and User Permissions Management**
-Only authorized personnel will have the ability to install updates on organizational systems, ensuring that all changes maintain integrity control within our network perimeter (access control). A comprehensive permission audit shall be conducted bi-annually by an independent security firm. 
+Roles and Responsibilities
+Executive leadership owns risk acceptance. Security leadership maintains the control baseline. IT operations implements controls. System owners validate evidence. All users follow approved security procedures and report suspected incidents.
 
-**In
+Access Control
+Access must follow least privilege, unique user identity, MFA for privileged and remote access, documented approvals, quarterly access reviews, and timely removal for role changes or termination.
+
+Risk Management
+Security risks must be assessed using likelihood and impact, recorded in a risk register, assigned an owner, reviewed at least quarterly, and formally accepted only by authorized leadership.
+
+Logging and Monitoring
+Critical systems must generate audit logs for authentication, administrative activity, configuration changes, security alerts, and policy exceptions. Logs must be monitored, retained, and reviewed according to business and regulatory needs.
+
+Incident Response
+Suspected incidents must be escalated immediately. The response process must include triage, containment, evidence preservation, stakeholder communication, eradication, recovery, and post-incident lessons learned.
+
+Recovery and Continuity
+Systems must have tested backup, restoration, rollback, and continuity procedures. Recovery validation must be documented after major incidents or high-risk changes.
+
+Compliance and Review
+Policy compliance must be reviewed at least annually and after major business, technology, or regulatory changes. Exceptions must be documented, time-bound, risk accepted, and reviewed.
+
+=== Control Alignment Table ===
+- PR-01 Access Control: Specify least privilege, MFA, administrative access, reviews, and joiner/mover/leaver handling.
+- ID-01 Risk Management: Connect the policy to risk assessment, risk acceptance, exceptions, and review cadence.
+- DE-01 Logging and Monitoring: Define monitoring, logging retention, alert triage, and evidence requirements.
+- RS-01 Incident Response: Describe escalation, containment, communications, rollback, and post-incident review.
+- RC-01 Recovery and Continuity: Add recovery expectations, rollback criteria, continuity steps, and restoration validation.
+- GV-04 Compliance and Review: Define compliance obligations, audit evidence, exception handling, and periodic review.
+
+=== 30/60/90 Day Remediation Roadmap ===
+- Days 0-30: Assign control owners, approve scope, document access review and incident escalation procedures.
+- Days 31-60: Implement evidence collection for logging, monitoring, risk register updates, and exception approvals.
+- Days 61-90: Run tabletop incident response, test recovery procedures, and complete executive compliance attestation.
+
+=== Original Policy Reference ===
+Patch Management Policy
+
+Purpose:
+This policy defines patching expectations for organization-managed systems.
+
+Scope:
+This policy applies to employee laptops, production servers, and business applications.
+
+Responsibilities:
+The IT operations team installs operating system and application updates monthly when possible.
+
+Change Handling:
+Emergency patches may be applied outside the normal maintenance window after manager approval.

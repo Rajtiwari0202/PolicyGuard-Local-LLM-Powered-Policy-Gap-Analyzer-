@@ -1,0 +1,178 @@
+{
+  "domain": "Patch Management",
+  "score": 27.5,
+  "readiness": "High Risk",
+  "present_controls": [
+    {
+      "control_id": "GV-01",
+      "title": "Purpose",
+      "nist_function": "Govern",
+      "severity": "Medium",
+      "weight": 8,
+      "keywords": [
+        "purpose",
+        "objective",
+        "intent",
+        "goal"
+      ],
+      "recommendation": "State the policy objective and business/security outcomes it supports.",
+      "evidence": "Purpose:",
+      "status": "Present"
+    },
+    {
+      "control_id": "GV-02",
+      "title": "Scope",
+      "nist_function": "Govern",
+      "severity": "Medium",
+      "weight": 8,
+      "keywords": [
+        "scope",
+        "applies to",
+        "covered systems",
+        "in scope"
+      ],
+      "recommendation": "Define users, systems, applications, data, and locations covered by the policy.",
+      "evidence": "Scope:",
+      "status": "Present"
+    },
+    {
+      "control_id": "GV-03",
+      "title": "Roles and Responsibilities",
+      "nist_function": "Govern",
+      "severity": "High",
+      "weight": 12,
+      "keywords": [
+        "roles",
+        "responsibilities",
+        "owner",
+        "accountable",
+        "raci",
+        "approver"
+      ],
+      "recommendation": "Assign accountable owners, approvers, operators, reviewers, and escalation contacts.",
+      "evidence": "Responsibilities:",
+      "status": "Present"
+    }
+  ],
+  "gaps": [
+    {
+      "control_id": "PR-01",
+      "title": "Access Control",
+      "nist_function": "Protect",
+      "severity": "High",
+      "weight": 14,
+      "keywords": [
+        "access control",
+        "least privilege",
+        "mfa",
+        "multi-factor",
+        "permission",
+        "authorization"
+      ],
+      "recommendation": "Specify least privilege, MFA, administrative access, reviews, and joiner/mover/leaver handling.",
+      "evidence": "",
+      "status": "Missing"
+    },
+    {
+      "control_id": "ID-01",
+      "title": "Risk Management",
+      "nist_function": "Identify",
+      "severity": "High",
+      "weight": 14,
+      "keywords": [
+        "risk",
+        "risk assessment",
+        "impact",
+        "likelihood",
+        "risk register",
+        "threat"
+      ],
+      "recommendation": "Connect the policy to risk assessment, risk acceptance, exceptions, and review cadence.",
+      "evidence": "",
+      "status": "Missing"
+    },
+    {
+      "control_id": "DE-01",
+      "title": "Logging and Monitoring",
+      "nist_function": "Detect",
+      "severity": "Medium",
+      "weight": 12,
+      "keywords": [
+        "logging",
+        "monitoring",
+        "audit log",
+        "event",
+        "alert",
+        "siem"
+      ],
+      "recommendation": "Define monitoring, logging retention, alert triage, and evidence requirements.",
+      "evidence": "",
+      "status": "Missing"
+    },
+    {
+      "control_id": "RS-01",
+      "title": "Incident Response",
+      "nist_function": "Respond",
+      "severity": "Critical",
+      "weight": 14,
+      "keywords": [
+        "incident response",
+        "incident",
+        "breach",
+        "escalation",
+        "containment",
+        "rollback"
+      ],
+      "recommendation": "Describe escalation, containment, communications, rollback, and post-incident review.",
+      "evidence": "",
+      "status": "Missing"
+    },
+    {
+      "control_id": "RC-01",
+      "title": "Recovery and Continuity",
+      "nist_function": "Recover",
+      "severity": "High",
+      "weight": 10,
+      "keywords": [
+        "recovery",
+        "backup",
+        "business continuity",
+        "restore",
+        "rollback",
+        "resilience"
+      ],
+      "recommendation": "Add recovery expectations, rollback criteria, continuity steps, and restoration validation.",
+      "evidence": "",
+      "status": "Missing"
+    },
+    {
+      "control_id": "GV-04",
+      "title": "Compliance and Review",
+      "nist_function": "Govern",
+      "severity": "High",
+      "weight": 10,
+      "keywords": [
+        "compliance",
+        "audit",
+        "review",
+        "regulatory",
+        "exception",
+        "attestation"
+      ],
+      "recommendation": "Define compliance obligations, audit evidence, exception handling, and periodic review.",
+      "evidence": "",
+      "status": "Missing"
+    }
+  ],
+  "vague_findings": [
+    "when possible",
+    "may"
+  ],
+  "summary": {
+    "total_controls": 9,
+    "present": 3,
+    "missing": 6,
+    "critical_gaps": 1,
+    "high_gaps": 4
+  }
+}
